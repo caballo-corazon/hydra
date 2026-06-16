@@ -1,0 +1,87 @@
+hush()
+
+
+
+bpm = 140
+s0.initImage("https://s3.eu-west-1.amazonaws.com/www.puntociego.es/cc/caballocoraz%C3%B3n.png")
+
+src(s0)
+//.luma(0.1,0.1)
+//osc(6)
+//noise(1.9,0.001)
+//.blend(voronoi(10,0.1,0.1),0.1)
+//.color(0.9,0.25,0.15)
+//.rotate(({time})=>(time%360)/2)
+//.kaleid(5)
+//.modulate(src(s0),0.1005)
+//.blend(s0,0.7)
+//.modulate(noise(0.9),0.0005)
+//.modulate(src(s0),0.5)
+//.blend(o2,0.1*(time%360)/2)
+//.blend(o1,(time%360))
+//.blend(o2,(time%360))
+//.blend(o3,(time%360))
+//.layer(o3)
+.blend(o3,0.9)
+//.blend(o3,Math.sin(time))
+//.blend(s0,[1,0,0,0,0,0,0.1,0.3,0.5,0.7].fast(0.2))
+.blend(s0,[1,0,0.1,0.3,0.5,0.7].smooth())
+//.blend(s0,Math.sin(time%360))
+.out(o0)
+
+render(o0)
+
+//s1.initImage("https://s3.eu-west-1.amazonaws.com/www.puntociego.es/cc/2620.svg")
+s1.initImage("https://s3.eu-west-1.amazonaws.com/www.puntociego.es/cc/1F480.svg")
+src(s1)
+.scale(0.5,1,1,1,0.9)
+//.scrollX(() => -mouse.x / width/2)
+//.scrollY(-0.001,(time%60))
+.scrollY(-0.905,0.009)
+  .out(o1)
+
+s2.initImage("https://s3.eu-west-1.amazonaws.com/www.puntociego.es/cc/260E.svg")
+src(s2)
+.scale(0.51,1,1,1,0.9)
+//.scrollY(() => -mouse.x / width/2)
+//.scrollY(0.4)
+.modulateScale(osc(1,-0.5,0.4)
+               .kaleid(5)
+               .scale(0.9)
+               ,0.5,0.1)
+.out(o2)
+
+//s3.initImage("https://s3.eu-west-1.amazonaws.com/www.puntociego.es/cc/2620-nocolor.svg")
+//s3.initImage("https://s3.eu-west-1.amazonaws.com/www.puntociego.es/cc/2764.svg")
+//s3.initImage("https://s3.eu-west-1.amazonaws.com/www.puntociego.es/cc/260E-nocolor.svg")
+
+canvas = document.createElement("canvas")
+canvas.width = 200
+canvas.height = 200
+ctx = canvas.getContext("2d")
+ctx.fillStyle = "crimson"
+ctx.fillStyle = "white"
+ctx.fillRect(10,100,150,150)
+ctx.fillRect(0,0,200,200)
+s3.init({src:canvas})
+//src(s3)
+src(s3)
+//.scroll(  () => -mouse.x / width,() => -mouse.y / height)
+  //.sub(src(o2))
+  //.mult(src(o1).kaleid(3))
+  .mult(src(o1))
+  .layer(o2)
+  .mult(src(o1))
+
+//.add(o1)
+//.scale(0.5,0.1,0.2,0.9,0.9)
+//.posterize([0.5,0.7].ease(),6)
+//noise(1.9,0.001)
+//.modulateScale(osc(1,-0.5,0.4))
+.out(o3)
+
+render(o0)
+//render(o1)
+//render(o2)
+//render(o3)
+//render()
